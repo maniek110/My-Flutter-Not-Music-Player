@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:myworkingapp/screens/MusicView.dart';
 import 'package:myworkingapp/screens/MyHttp.dart';
 
 class ListPage extends StatefulWidget{
@@ -25,7 +26,7 @@ class _ListPage extends State<ListPage>{
               new RaisedButton(
                 child: Text("Music Player"),
                 onPressed: ()=>Navigator.push(context,
-                    MaterialPageRoute(builder: (context)=>MyHttp())),
+                    MaterialPageRoute(builder: (context)=>MusicView())),
               ),new RaisedButton(
                 child: Text("Recipies"),
                 onPressed: ()=>Navigator.push(context,
