@@ -1,5 +1,6 @@
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_permissions/simple_permissions.dart';
 void main()=>runApp(new MaterialApp(home: MusicView()));
 
 class MusicView extends StatefulWidget{
@@ -8,36 +9,41 @@ class MusicView extends StatefulWidget{
 }
 
 class _MusicView extends State<MusicView>{
-  MusicFinder audioPlayer;
+  List<Song> _songList;
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    audioPlayer = new MusicFinder();
-    getSongs();
+    initMusic();
   }
-  @override
-  void dispose() {
-    audioPlayer=null;
-    super.dispose();
+  void initMusic() async{
+    PermissionStatus permissionResult = await SimplePermissions.requestPermission(Permission. WriteExternalStorage);
+      if (permissionResult == PermissionStatus.authorized){
+      var list=await MusicFinder.allSongs();
+      list=new List.from(list);
+      setState(() {
+        _songList=list;
+      });
+    }
+
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
-    );
-  }
-
-  Future getSongs() async{
-    List<Song> songs;
-    try {
-      songs = await MusicFinder.allSongs();
-    }catch(x){
-      print(x.toString());
+    Widget home(){
+      return new Scaffold(
+        backgroundColor: Colors.amberAccent,
+        body: ListView.builder(
+            itemCount: _songList.length,
+            itemBuilder: (context,int index){
+              return new ListTile(
+                leading: new Icon(Icons.music_note),
+                title: new Text(_songList[index].title),
+              );
+            }
+        ),
+      );
     }
-    if(songs.isNotEmpty) audioPlayer.play(songs.first.uri);
-    else print("NIMA");
+    return home();
   }
-
 }
 
 
