@@ -1,5 +1,6 @@
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
+import 'package:myworkingapp/screens/SongData.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 void main()=>runApp(new MaterialApp(home: MusicView()));
 
@@ -9,40 +10,61 @@ class MusicView extends StatefulWidget{
 }
 
 class _MusicView extends State<MusicView>{
-  List<Song> _songList;
-  @override
-  void initState(){
-    super.initState();
-    initMusic();
-  }
-  void initMusic() async{
-    PermissionStatus permissionResult = await SimplePermissions.requestPermission(Permission. WriteExternalStorage);
-      if (permissionResult == PermissionStatus.authorized){
-      var list=await MusicFinder.allSongs();
-      list=new List.from(list);
-      setState(() {
-        _songList=list;
-      });
-    }
+  SongData songData;
+  MusicFinder musicFinder;
+  bool _isLoading = true;
 
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+    musicFinder=new MusicFinder();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    songData.audioPlayer.stop();
+  }
+    initPlatformState() async {
+    _isLoading = true;
+    var songs;
+    try {
+      songs = await MusicFinder.allSongs();
+    } catch (e) {
+      print("Failed to get songs: '${e.message}'.");
+    }
+    if (!mounted) return;
+
+    setState(() {
+      songData = new SongData(songs);
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget home(){
       return new Scaffold(
         backgroundColor: Colors.amberAccent,
         body: ListView.builder(
-            itemCount: _songList.length,
+            itemCount: songData.length,
             itemBuilder: (context,int index){
               return new ListTile(
-                leading: new Icon(Icons.music_note),
-                title: new Text(_songList[index].title),
+                leading: new IconButton(icon: new Icon(Icons.music_note), onPressed: ()=>play(songData.songs[index]),),
+                title: new Text(songData.songs[index].title),
+
               );
             }
         ),
       );
     }
     return home();
+  }
+
+  Future play(Song s) async{
+    final result=await musicFinder.play(s.uri);
+    //songData.audioPlayer.play(songData.songs[1].uri);
   }
 }
 

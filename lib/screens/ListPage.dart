@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:myworkingapp/screens/MusicView.dart';
+import 'package:myworkingapp/screens/MyColors.dart';
 import 'package:myworkingapp/screens/MyHttp.dart';
 
 class ListPage extends StatefulWidget{
@@ -12,7 +13,7 @@ class _ListPage extends State<ListPage>{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(canvasColor: Colors.white70,fontFamily: 'Virtuous'),
+      theme: ThemeData(canvasColor: Color(MyColors.pawn).withOpacity(1),fontFamily: 'Virtuous'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body:  Column(
