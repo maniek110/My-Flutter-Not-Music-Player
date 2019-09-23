@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:myworkingapp/screens/SongData.dart';
-import 'package:simple_permissions/simple_permissions.dart';
+
 void main()=>runApp(new MaterialApp(home: MusicView()));
 
 class MusicView extends StatefulWidget{
@@ -51,9 +52,9 @@ class _MusicView extends State<MusicView>{
             itemCount: songData.length,
             itemBuilder: (context,int index){
               return new ListTile(
-                leading: new IconButton(icon: new Icon(Icons.music_note), onPressed: ()=>play(songData.songs[index]),),
-                title: new Text(songData.songs[index].title),
-
+                leading: songData.songs[index].albumArt!=null ? new Image.file(File.fromUri(Uri.parse(songData.songs[index].albumArt)),scale: 1) : null,
+                title: new Text(songData.songs[index].albumArt.toString()),
+                  //onTap: ()=>play(songData.songs[index])
               );
             }
         ),

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:myworkingapp/screens/MusicView.dart';
 import 'package:myworkingapp/screens/MyColors.dart';
 import 'package:myworkingapp/screens/MyHttp.dart';
+import 'package:myworkingapp/screens/newMusicView.dart';
 
 class ListPage extends StatefulWidget{
   @override
@@ -13,7 +14,7 @@ class _ListPage extends State<ListPage>{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(canvasColor: Color(MyColors.pawn).withOpacity(1),fontFamily: 'Virtuous'),
+      theme: ThemeData(canvasColor: Color(MyColors.old_rose).withOpacity(1),fontFamily: 'Virtuous'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body:  Column(
@@ -31,7 +32,7 @@ class _ListPage extends State<ListPage>{
               ),new RaisedButton(
                 child: Text("Recipies"),
                 onPressed: ()=>Navigator.push(context,
-                    MaterialPageRoute(builder: (context)=>MyHttp())),
+                    MaterialPageRoute(builder: (context)=>newMusicView())),
               ),new RaisedButton(
                 child: Text("Some Magic"),
                 onPressed: ()=>Navigator.push(context,
