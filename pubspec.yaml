@@ -62,6 +62,9 @@ flutter:
       fonts:
           - asset: fonts/Virtuous-Slab.otf
           - asset: fonts/Virtuous-Slab Bold.otf
+    - family: Fox
+      fonts:
+          - asset: fonts/Fox.otf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

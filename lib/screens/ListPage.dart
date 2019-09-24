@@ -14,7 +14,7 @@ class _ListPage extends State<ListPage>{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(canvasColor: Color(MyColors.old_rose).withOpacity(1),fontFamily: 'Virtuous'),
+      theme: ThemeData(canvasColor: Color(MyColors.aquamarine).withOpacity(1),fontFamily: 'Virtuous'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body:  Column(
