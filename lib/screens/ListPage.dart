@@ -11,10 +11,11 @@ class ListPage extends StatefulWidget{
 }
 
 class _ListPage extends State<ListPage>{
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(canvasColor: Color(MyColors.aquamarine).withOpacity(1),fontFamily: 'Virtuous'),
+      theme: ThemeData(canvasColor: MyColors.c1.withOpacity(1),fontFamily: 'Virtuous'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body:  Column(
