@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:myworkingapp/screens/MyColors.dart';
 
-class newMusicView extends StatefulWidget{
+class newMusicView extends StatelessWidget{
   @override
-  State<StatefulWidget> createState() =>_newMusicView();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: _newMusicView(),
+    );
+  }
 }
-class _newMusicView extends State<newMusicView>{
+class _newMusicView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
